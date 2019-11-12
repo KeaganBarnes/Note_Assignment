@@ -7,19 +7,19 @@ class NotesController < ApplicationController
 
   def show
     #html - Specific Note
-    @note = Note.find(params[:id])
+    @notes = Note.find(params[:id])
   end
 
   def new
     #html - Form for New Note
-    @note = Note.new
+    @notes = Note.new
   end
 
   def create
-    @note = Note.new(notes_params)
-    @note.save
+    @notes = Note.new(notes_params)
+    @notes.save
 
-    if @note.save
+    if @notes.save
       redirect_to notes_path
     else
       render :new
@@ -33,17 +33,17 @@ class NotesController < ApplicationController
 
   def edit
     #html - Form for an existing Blog
-    @note = Note.find(params[:id])
-
-    if @note.update(page_params)
-      redirect_to pages_path
-    else
-      render :edit
-    end
+    @notes = Note.find(params[:id])
   end
 
   def update
-    Note.find(params[:id]).update
+    @notes = Note.find(params[:id])
+
+    if @notes.update(page_params)
+      notes_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -51,3 +51,4 @@ class NotesController < ApplicationController
   end
 
 end
+ 
